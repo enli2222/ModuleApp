@@ -10,8 +10,9 @@
 
 @implementation ELRouter(Action_JY)
 
--(void)Action_100:(NSString *)param{
-    NSLog(@"Action_100");
+-(void)Action_100:(NSDictionary *)params{
+    NSInteger num = [[params objectForKey:@"action"] integerValue];
+    NSLog(@"Action_100: %ld",num);
 }
 
 @end

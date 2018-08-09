@@ -23,9 +23,14 @@
 }
 
 +(void) OnMsg:(NSInteger)nMsgType wParam:(NSObject *)wParam lParam:(NSObject *)lParam{
-    NSString * actionString = [NSString  stringWithFormat:@"Action_%ld:",nMsgType];
+    NSInteger num = nMsgType;
+    if (nMsgType >=100 && nMsgType <= 20000) {
+        num = 100; //进行功能汇聚
+    }
+    NSString * actionString = [NSString  stringWithFormat:@"Action_%ld:",num];
     SEL action =  NSSelectorFromString(actionString);
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"action"] = [NSNumber numberWithInteger:num];
     params[@"lParam"] = lParam;
     params[@"wParam"] = wParam;
     [[ELRouter shareRouter] safePerformAction:action params:params];
